@@ -1,34 +1,41 @@
 class Spikes
 {
 
-  float xPos;
-  float yPos;
-  float fixedPos;
+  float[] xPos = new float[10];
+  float[] yPos = new float[10];
+  float[] fixedPos = new float[10];
   float spikeSpeed=5;
   float spikeCol;
   float cell = width/10;//evenly spaces spikes
+  int spikeNum = 10;
   public Spikes()
   {
   }
   void spikeLocation()
   {
-    spikeCol = random(0,200);
-    xPos = cell* (int)random(10);
-    yPos = random(50, 150)-100;
-    fixedPos = -100;
-    if (spikeSpeed<10)
+    spikeCol = random(0, 200);
+    for (int i = 0; i < spikeNum; i++)
     {
-      spikeSpeed+=0.1;
+      xPos[i]= cell * random(10);
+      yPos[i] = random(50, 150)-100;
+      fixedPos[i] = -100;
+      if (spikeSpeed<10)
+      {
+        spikeSpeed+=0.1;
+      }
     }
   }
 
   void update()
   {
-    yPos+=spikeSpeed;
-    fixedPos+=spikeSpeed;
-    if (yPos > height+150)
+    for (int i=0;i<spikeNum;i++)
     {
-      spikeLocation();
+      yPos[i]+=spikeSpeed;
+      fixedPos[i]+=spikeSpeed;
+      if (yPos[i] > height+150)
+      {
+        spikeLocation();
+      }
     }
   }
 
@@ -36,7 +43,10 @@ class Spikes
   {
     stroke(spikeCol);
     fill(spikeCol);
-    triangle(xPos, fixedPos, xPos+25, yPos,xPos+50, fixedPos);
+    for(int i=0;i<spikeNum;i++)
+    {
+    triangle(xPos[i], fixedPos[i], xPos[i]+25, yPos[i], xPos[i]+50, fixedPos[i]);
+    }
   }
 }
 

@@ -46,6 +46,13 @@ void draw()
     fill(0);
     spikes.render();
     spikes.update();
+    if(keyPressed)
+    {
+      if(key =='m')
+      {
+        screen = 0;
+      }
+    }
   }
 }
 
