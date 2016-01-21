@@ -36,9 +36,6 @@ class Spikes
     stroke(spikeCol);
     fill(spikeCol);
     triangle(xPos, fixedPos, xPos+25, yPos,xPos+50, fixedPos);
-    //line(xPos, fixedPos, xPos+25, yPos);
-    //line(xPos, fixedPos,xPos+50, fixedPos );
-    //line(xPos+25, yPos, xPos+50, fixedPos);
   }
 }
 
