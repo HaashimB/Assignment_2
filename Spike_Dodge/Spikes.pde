@@ -6,18 +6,19 @@ class Spikes
   float fixedPos;
   float spikeSpeed=5;
   float spikeCol;
+  float cell = width/10;//evenly spaces spikes
   public Spikes()
   {
   }
   void spikeLocation()
   {
     spikeCol = random(0,200);
-    xPos = random(width*0.1, width*0.9);
+    xPos = cell* (int)random(10);
     yPos = random(50, 150)-100;
     fixedPos = -100;
     if (spikeSpeed<10)
     {
-      spikeSpeed+=0.01;
+      spikeSpeed+=0.1;
     }
   }
 
