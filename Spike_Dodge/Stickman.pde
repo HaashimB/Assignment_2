@@ -39,6 +39,7 @@ class Stickman
   void render()
   {
     pushMatrix(); // reset the tr+n and rotation
+    stroke(0);
     fill(255);
     ellipse(xPlayer,430,head,head);
     line(xPlayer,443,xPlayer,470);

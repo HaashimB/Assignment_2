@@ -4,17 +4,21 @@ class Spikes
   float xPos;
   float yPos;
   float fixedPos;
-  float spikeSpeed;
-  
+  float spikeSpeed=5;
+  float spikeCol;
   public Spikes()
   {
   }
   void spikeLocation()
   {
+    spikeCol = random(0,200);
     xPos = random(width*0.1, width*0.9);
-    yPos = random(50, 150);
-    fixedPos = 0;
-    spikeSpeed = 4;
+    yPos = random(50, 150)-100;
+    fixedPos = -100;
+    if (spikeSpeed<10)
+    {
+      spikeSpeed+=0.01;
+    }
   }
 
   void update()
@@ -25,14 +29,16 @@ class Spikes
     {
       spikeLocation();
     }
-    
   }
 
   void render()
   {
-    line(xPos, fixedPos, xPos+25, yPos);
-    line(xPos, fixedPos, xPos+50, fixedPos);
-    line(xPos+25, yPos, xPos+50, fixedPos);
+    stroke(spikeCol);
+    fill(spikeCol);
+    triangle(xPos, fixedPos, xPos+25, yPos,xPos+50, fixedPos);
+    //line(xPos, fixedPos, xPos+25, yPos);
+    //line(xPos, fixedPos,xPos+50, fixedPos );
+    //line(xPos+25, yPos, xPos+50, fixedPos);
   }
 }
 

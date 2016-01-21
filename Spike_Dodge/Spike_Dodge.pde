@@ -33,7 +33,7 @@ void draw()
   
   stickman.update('a','d');
   stickman.render();
-  
+  fill(0);
   spikes.render();
   spikes.update();
   }
