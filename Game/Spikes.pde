@@ -6,19 +6,41 @@ class Spikes
   float[] fixedPos = new float[spikeNum];
   float[] spikeSpeed=new float[spikeNum];
   float[] spikeCol = new float[spikeNum];
-  boolean[] spikeFall = new boolean[spikeNum];
-  int counter = 0;
   float cell = width/10;//evenly spaces spikes
+  int difficulty;
 
-  public Spikes()
+  Spikes()
   {
+  }
+  void easy()
+  {
+    difficulty = 1;
+    for (int i = 0; i < spikeNum; i++)
+    {
+      spikeSpeed[i] = random(2, 5);
+    }
+  }
+  void medium()
+  {
+    difficulty = 2;
+    for (int i = 0; i < spikeNum; i++)
+    {
+      spikeSpeed[i] = random(6, 11);
+    }
+  }
+  void hard()
+  {
+    difficulty = 3;
+    for (int i = 0; i < spikeNum; i++)
+    {
+      spikeSpeed[i] = random(10, 14);
+    }
   }
   void spikeLocation()
   {
 
     for (int i = 0; i < spikeNum; i++)
     {
-      spikeSpeed[i] = random(5, 10);
       spikeCol[i] = random(100, 200);
       xPos[i]= cell * random(10);
       yPos[i] = random(50, 150)-100;
@@ -27,7 +49,7 @@ class Spikes
       {
         spikeSpeed[i]+=0.05;
       }
-      counter = 0;
+
     }
   }
 
@@ -43,6 +65,18 @@ class Spikes
         yPos[i] = random(50, 150)-100;
         xPos[i]= cell * random(10);
         fixedPos[i] = -100;
+        if(difficulty == 1)
+        {
+          spikeSpeed[i] = random(2, 5);
+        }
+        if(difficulty == 2)
+        {
+          spikeSpeed[i] = random(6, 11);
+        }
+        if(difficulty == 3)
+        {
+          spikeSpeed[i] = random(8, 14);
+        }
       }
     }
   }
