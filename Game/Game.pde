@@ -10,13 +10,14 @@ void setup()
   spikes.spikeLocation();
 }
 int screen = 0;
-color[] playCol = new color[4];
+color playCol;
+color[] diffCol = new color[3];
 void draw()
 {
   if (screen == 0)
   {
     background(0);   
-    fill(playCol[0]);
+    fill(playCol);
     rect(width/2-50, height*0.3-30, 100, 40);
     fill(255);
     textSize(38);
@@ -26,24 +27,24 @@ void draw()
     text("Play", width/2, height*0.3);
     if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.3-30&&mouseY<height*0.3+30)
     {
-      playCol[0] = color(155, 0, 255);
+      playCol = color(155, 0, 255);
       if (mousePressed)
       {
         screen = 1;
       }
     } else
     {
-      playCol[0]=color(200, 100, 255);
+      playCol=color(200, 100, 255);
     }
   }
   if (screen == 1)
   {
     background(0);   
-    fill(playCol[1]);
+    fill(diffCol[0]);
     rect(width*0.2-50, height*0.5-30, 100, 40);
-    fill(playCol[2]);
+    fill(diffCol[1]);
     rect(width*0.5-50, height*0.5-30, 100, 40);
-    fill(playCol[3]);
+    fill(diffCol[2]);
     rect(width*0.8-50, height*0.5-30, 100, 40);
     fill(255);
     textSize(25);
@@ -55,7 +56,7 @@ void draw()
     text("Hard", width*0.8, height*0.5);
     if (mouseX>width*0.2-50&&mouseX<width*0.2+50&&mouseY>height*0.5-30&&mouseY<height*0.5+30)
     {
-      playCol[1] = color(155, 0, 255);
+      diffCol[0] = color(155, 0, 255);
       if (mousePressed)
       {
         spikes.easy();
@@ -64,7 +65,7 @@ void draw()
     }
     if (mouseX>width*0.5-50&&mouseX<width*0.5+50&&mouseY>height*0.5-30&&mouseY<height*0.5+30)
     {
-      playCol[2] = color(155, 0, 255);
+      diffCol[1] = color(155, 0, 255);
       if (mousePressed)
       {
         spikes.medium();
@@ -73,7 +74,7 @@ void draw()
     } 
     if (mouseX>width*0.8-50&&mouseX<width*0.8+50&&mouseY>height*0.5-30&&mouseY<height*0.5+30)
     {
-      playCol[3] = color(155, 0, 255);
+      diffCol[2] = color(155, 0, 255);
       if (mousePressed)
       {
         spikes.hard();
@@ -82,9 +83,9 @@ void draw()
     } 
     else
     {
-      for (int i = 1; i<3; i++)
+      for (int i = 0; i<diffCol.length; i++)
       {
-        playCol[i]=color(200, 100, 255);
+        diffCol[i]=color(200, 100, 255);
       }
     }
   }
