@@ -1,13 +1,15 @@
 class Spikes
 {
-
-  float[] xPos = new float[10];
-  float[] yPos = new float[10];
-  float[] fixedPos = new float[10];
-  float spikeSpeed=5;
-  float[] spikeCol = new float[200];
+  int spikeNum = 5;
+  float[] xPos = new float[spikeNum];
+  float[] yPos = new float[spikeNum];
+  float[] fixedPos = new float[spikeNum];
+  float[] spikeSpeed=new float[spikeNum];
+  float[] spikeCol = new float[spikeNum];
+  boolean[] spikeFall = new boolean[spikeNum];
+  int counter = 0;
   float cell = width/10;//evenly spaces spikes
-  int spikeNum = 10;
+
   public Spikes()
   {
   }
@@ -16,14 +18,16 @@ class Spikes
 
     for (int i = 0; i < spikeNum; i++)
     {
-      spikeCol[i] = random(0, 200);
+      spikeSpeed[i] = random(5, 10);
+      spikeCol[i] = random(100, 200);
       xPos[i]= cell * random(10);
       yPos[i] = random(50, 150)-100;
       fixedPos[i] = -100;
-      if (spikeSpeed<10)
+      if (spikeSpeed[i]<7)
       {
-        spikeSpeed+=0.1;
+        spikeSpeed[i]+=0.05;
       }
+      counter = 0;
     }
   }
 
@@ -31,11 +35,14 @@ class Spikes
   {
     for (int i=0; i<spikeNum; i++)
     {
-      yPos[i]+=spikeSpeed;
-      fixedPos[i]+=spikeSpeed;
-      if (yPos[i] > height+150)
+
+      yPos[i]+=spikeSpeed[i];
+      fixedPos[i]+=spikeSpeed[i];
+      if (yPos[i] >= height+150)
       {
-        spikeLocation();
+        yPos[i] = random(50, 150)-100;
+        xPos[i]= cell * random(10);
+        fixedPos[i] = -100;
       }
     }
   }
