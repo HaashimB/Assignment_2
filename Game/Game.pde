@@ -4,13 +4,14 @@ Stickman stickman;
 Spikes spikes;
 void setup()
 {
-  size(500, 500);
+  size(700, 500);
   stickman = new Stickman('a', 'd');
   spikes = new Spikes();
   spikes.spikeLocation();
 }
 int screen = 0;
 color playCol;
+color quitCol;
 color diffCol1;
 color diffCol2;
 color diffCol3;
@@ -20,14 +21,20 @@ void draw()
   {
     background(0);   
     fill(playCol);
-    rect(width/2-50, height*0.3-30, 100, 40);
+    rect(width/2-50, height*0.55-30, 100, 40);
+    fill(quitCol);
+    rect(width/2-50, height*0.7-30, 100, 40);
     fill(255);
-    textSize(38);
+    textSize(34);
     textAlign(CENTER);
-    text("Anti-Gravity: StalagMIGHT", width/2, height*0.1);
+    text("Anti-Gravity:", width/2, height*0.2);
+    textSize(40);
+    text("StalagMIGHT",width/2,height*0.28);
+    
     textSize(30);
-    text("Play", width/2, height*0.3);
-    if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.3-30&&mouseY<height*0.3+10)
+    text("Play", width/2, height*0.55);
+    text("Quit", width/2, height*0.7);
+    if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.55-30&&mouseY<height*0.55+10)
     {
       playCol = color(155, 0, 255);
       if (mousePressed)
@@ -37,6 +44,17 @@ void draw()
     } else
     {
       playCol=color(200, 100, 255);
+    }
+    if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.7-30&&mouseY<height*0.7+10)
+    {
+      quitCol = color(155, 0, 255);
+      if (mousePressed)
+      {
+        exit();
+      }
+    } else
+    {
+      quitCol=color(200, 100, 255);
     }
   }
   if (screen == 1)
