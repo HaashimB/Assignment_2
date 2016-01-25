@@ -1,4 +1,4 @@
-class Spikes
+class Spikes extends GameObject
 {
   int spikeNum = 5;
   float[] xPos = new float[spikeNum];

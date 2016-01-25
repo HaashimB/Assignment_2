@@ -1,4 +1,4 @@
-class Stickman
+class Stickman extends GameObject
 {
   char left;
   char right;
