@@ -43,12 +43,8 @@ class Spikes extends GameObject
     {
       spikeCol[i] = random(100, 200);
       xPos[i]= cell * random(10);
-      yPos[i] = cell * random(5, 15)-100;
+      yPos[i] = random(50, 150)-100;
       fixedPos[i] = -100;
-      if (spikeSpeed[i]<7)
-      {
-        spikeSpeed[i]+=0.05;
-      }
 
     }
   }
@@ -71,11 +67,11 @@ class Spikes extends GameObject
         }
         if(difficulty == 2)
         {
-          spikeSpeed[i] = random(6, 11);
+          spikeSpeed[i] = random(4, 7);
         }
         if(difficulty == 3)
         {
-          spikeSpeed[i] = random(8, 14);
+          spikeSpeed[i] = random(6, 10);
         }
       }
     }

@@ -15,6 +15,10 @@ void setup()
   hBlue = loadImage("Helmet_Blue.png");
   hRed = loadImage("Helmet_Red.png");
 }
+void gameInit()
+{
+  
+}
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 int screen = 0;
 color playCol;
@@ -24,6 +28,7 @@ color diffCol2;
 color diffCol3;
 PImage face, hGreen, hRed, hBlue;
 float imgheight = 240;
+int lives = 3;
 void draw()
 {
   if (screen == 0)
@@ -151,41 +156,63 @@ void draw()
     }
     collisions();
   }
+  if (screen ==3)
+  {
+    background(0);
+    textSize(40);
+    text("GAME OVER", width/2, height*0.28);
+    fill(diffCol2);
+    rect(width*0.6-50, height*0.6-30, 100, 40);
+    fill(diffCol1);
+    rect(width*0.4-50, height*0.6-30, 100, 40);
+    fill(255);
+    textSize(30);
+    text("Play", width*0.4, height*0.6);
+    textSize(30);
+    text("Back", width*0.6, height*0.6);
+    if (mouseX>width*0.4-50&&mouseX<width*0.4+50&&mouseY>height*0.6-30&&mouseY<height*0.6+10)
+    {
+      diffCol1 = color(155, 0, 255);
+      if (mousePressed)
+      {
+        spikes.medium();
+        screen = 2;
+      }
+    } else
+    {
+      diffCol1=color(200, 100, 255);
+    }
+    if (mouseX>width*0.6-50&&mouseX<width*0.6+50&&mouseY>height*0.6-30&&mouseY<height*0.6+10)
+    {
+      diffCol2 = color(155, 0, 255);
+      if (mousePressed)
+      {
+        spikes.hard();
+        screen = 0;
+      }
+    } else
+    {
+      diffCol2=color(200, 100, 255);
+    }
+  }
 }
 
 void collisions()
 {
+
   for (int i = 0; i<5; i++)
   {
-    if (dist(stickman.xPlayer, 480, spikes.xPos[i], spikes.yPos[i]) <= spikes.cell)
+    if (dist(stickman.xPlayer-30, 480, spikes.xPos[i], spikes.yPos[i]) <= spikes.cell-10)
     {
-      //lives = lives - 1;
       spikes.xPos[i] = width * 2 ;//move it out of the way
-      println("You Dead boi");
-      screen = 1;
+      println("lives = " + lives);
+      if (lives == 0)
+      {
+        screen = 3;
+        lives = 3;
+      } 
+      lives--;
     }//end if
   }//end for
-  /*for (int i = gameObjects.size () - 1; i >= 0; i --)
-   {
-   GameObject go = gameObjects.get(i);
-   if (go instanceof Stickman)
-   {
-   for (int j = gameObjects.size () - 1; j >= 0; j --)
-   {
-   GameObject other = gameObjects.get(j);
-   if (other instanceof Spikes) // Check the type of a object
-   {
-   // Bounding circle collisions
-   for (int x = 0; x<5; x++)
-   {
-   if (spikes.yPos[x].dist(spikes.yPos[x]) < spikes.yPos[x] + stickman.xPlayer)
-   {
-   println("You Dead boi");
-   }
-   }
-   }
-   }
-   }
-   }*/
 }
 
