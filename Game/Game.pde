@@ -2,6 +2,7 @@
 
 Stickman stickman;
 Spikes spikes;
+PFont titleFont;
 void setup()
 {
   size(700, 500);
@@ -14,6 +15,8 @@ void setup()
   hGreen = loadImage("Helmet_Green.png");
   hBlue = loadImage("Helmet_Blue.png");
   hRed = loadImage("Helmet_Red.png");
+  titleFont = loadFont("Standard0757-48.vlw");
+  helmet = hGreen;
 }
 void gameInit()
 {
@@ -21,60 +24,95 @@ void gameInit()
 }
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 int screen = 0;
-color playCol;
-color quitCol;
 color diffCol1;
 color diffCol2;
 color diffCol3;
+float r = (255);
+float g = (255);
+float b = (150);
 PImage face, hGreen, hRed, hBlue;
-float imgheight = 240;
+float imgheight = 250;
 int lives = 3;
+PImage helmet;
 void draw()
 {
   if (screen == 0)
   {
-    background(0);   
-    image(face, width*0.15, imgheight);
-    image(hGreen, width*0.15, imgheight-70);
+    background(100);   
+    image(face, width*0.21, imgheight);
+    image(helmet, width*0.21, imgheight-70);
 
-    fill(playCol);
+    fill(diffCol1);
     rect(width/2-50, height*0.55-30, 100, 40);
-    fill(quitCol);
+    fill(diffCol2);
     rect(width/2-50, height*0.7-30, 100, 40);
+    fill(0,220,0);
+    rect(width*0.15-25, height*0.35-10, 50, 20);
+    fill(220,0,0);
+    rect(width*0.05-25, height*0.35-10, 50, 20);
+    fill(0,0,220);
+    rect(width*0.25-25, height*0.35-10, 50, 20);
+    
     fill(255);
-    textSize(34);
+    textFont(titleFont,34);
     textAlign(CENTER);
-    text("Anti-Gravity:", width/2, height*0.2);
+    text("Anti-Gravity:", width/2, height*0.1);
     textSize(40);
-    text("StalagMIGHT", width/2, height*0.28);
-
-    textSize(30);
+    text("StalagMIGHT", width/2, height*0.18);
+    textSize(15);
+    text("Choose Helmet Color:",width*0.15,height*0.3);
+    textSize(28);
+    fill(0);
     text("Play", width/2, height*0.55);
     text("Quit", width/2, height*0.7);
+    
+    
     if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.55-30&&mouseY<height*0.55+10)
     {
-      imgheight = height*0.48;
-      playCol = color(155, 0, 255);
+      imgheight = height*0.5;
+      diffCol1 = color(r,g,b);
       if (mousePressed)
       {
         screen = 1;
       }
     } else
     {
-      playCol=color(200, 100, 255);
+      diffCol1=color(200);
     }
     if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.7-30&&mouseY<height*0.7+10)
     {
-      imgheight = height*0.7;
-      quitCol = color(155, 0, 255);
+      imgheight = height*0.66;
+      diffCol2 = color(r,g,b);
       if (mousePressed)
       {
         exit();
       }
     } else
     {
-      quitCol=color(200, 100, 255);
+      diffCol2=color(200);
     }
+    if (mouseX>width*0.15-25&&mouseX<width*0.15+25&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
+    {
+      if(mousePressed)
+      {
+        helmet = hGreen;
+      }
+    }
+    if (mouseX>width*0.25-25&&mouseX<width*0.25+25&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
+    {
+      if(mousePressed)
+      {
+        helmet = hBlue;
+      }
+    }
+    if (mouseX>width*0.05-25&&mouseX<width*0.05+25&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
+    {
+      if(mousePressed)
+      {
+        helmet = hRed;
+      }
+    }
+    
   }
   if (screen == 1)
   {
