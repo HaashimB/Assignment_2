@@ -47,11 +47,11 @@ void draw()
     fill(diffCol2);
     rect(width/2-50, height*0.7-30, 100, 40);
     fill(0,220,0);
-    rect(width*0.15-25, height*0.35-10, 50, 20);
+    rect(width*0.15-25, height*0.35-10, 20, 20);
     fill(220,0,0);
-    rect(width*0.05-25, height*0.35-10, 50, 20);
+    rect(width*0.1-25, height*0.35-10, 20, 20);
     fill(0,0,220);
-    rect(width*0.25-25, height*0.35-10, 50, 20);
+    rect(width*0.2-25, height*0.35-10, 20, 20);
     
     fill(255);
     textFont(titleFont,34);
@@ -91,21 +91,21 @@ void draw()
     {
       diffCol2=color(200);
     }
-    if (mouseX>width*0.15-25&&mouseX<width*0.15+25&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
+    if (mouseX>width*0.1-10&&mouseX<width*0.15+10&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
     {
       if(mousePressed)
       {
         helmet = hGreen;
       }
     }
-    if (mouseX>width*0.25-25&&mouseX<width*0.25+25&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
+    if (mouseX>width*0.15-10&&mouseX<width*0.2+10&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
     {
       if(mousePressed)
       {
         helmet = hBlue;
       }
     }
-    if (mouseX>width*0.05-25&&mouseX<width*0.05+25&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
+    if (mouseX>width*0.05-10&&mouseX<width*0.1+10&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
     {
       if(mousePressed)
       {
