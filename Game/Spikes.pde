@@ -67,7 +67,7 @@ class Spikes extends GameObject
         }
         if(difficulty == 2)
         {
-          spikeSpeed[i] = random(4, 7);
+          spikeSpeed[i] = random(3, 7);
         }
         if(difficulty == 3)
         {

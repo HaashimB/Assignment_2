@@ -2,12 +2,15 @@
 
 Stickman stickman;
 Spikes spikes;
+Sprites sprites;
 PFont titleFont;
 void setup()
 {
   size(700, 500);
   stickman = new Stickman('a', 'd');
   spikes = new Spikes();
+  sprites = new Sprites();
+  sprites.imageInit();
   gameObjects.add(spikes);
   gameObjects.add(stickman);
   spikes.spikeLocation();
@@ -17,6 +20,7 @@ void setup()
   hRed = loadImage("Helmet_Red.png");
   titleFont = loadFont("Standard0757-48.vlw");
   helmet = hGreen;
+  
 }
 void gameInit()
 {
@@ -182,6 +186,10 @@ void draw()
 
     stickman.update('a', 'd');
     stickman.render();
+    
+    sprites.spriteChooser();
+    sprites.update('a','d');
+    sprites.render();
     fill(0);
     spikes.render();
     spikes.update();
@@ -244,12 +252,12 @@ void collisions()
     {
       spikes.xPos[i] = width * 2 ;//move it out of the way
       println("lives = " + lives);
-      if (lives == 0)
+      /*if (lives == 0)
       {
         screen = 3;
         lives = 3;
       } 
-      lives--;
+      lives--;*/
     }//end if
   }//end for
 }

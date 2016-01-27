@@ -3,8 +3,7 @@ class Stickman extends GameObject
   char left;
   char right;
   int head = height/20;
-  int xPlayer = width/2;
-  int xSpeed = 5;
+  
   
   Stickman(char left, char right)
   {
