@@ -1,7 +1,8 @@
 class Sprites extends GameObject
 {
   PImage GreenRun1;
-  
+  PImage GreenStand;
+  PImage stillImage;
   PImage activeImage;
   Sprites()
   {
@@ -9,6 +10,7 @@ class Sprites extends GameObject
   
   void imageInit()
   {
+    GreenStand = loadImage("StandStillGeen.png");
     GreenRun1 = loadImage("Run1Green.png");
   }
   void update(char left,char right)
@@ -31,7 +33,15 @@ class Sprites extends GameObject
         image(activeImage, xPlayer-70, 410);
         popMatrix();
       }    
+      
     }
+    else
+      {
+        pushMatrix();
+        scale(1.0, 1.0);
+        image(stillImage,xPlayer-70, 410);
+        popMatrix();
+      }
     
     if(xPlayer < 0)
     {
@@ -50,8 +60,9 @@ class Sprites extends GameObject
   void spriteChooser()
   {
     
-      activeImage = GreenRun1;
-    activeImage.resize(140,110); 
-    
+    activeImage = GreenRun1;
+    activeImage.resize(140,110);
+    stillImage = GreenStand; 
+    stillImage.resize(140,110);
   }
 }
