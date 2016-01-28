@@ -20,11 +20,9 @@ void setup()
   hRed = loadImage("Helmet_Red.png");
   titleFont = loadFont("Standard0757-48.vlw");
   helmet = hGreen;
-  
 }
 void gameInit()
 {
-  
 }
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 int screen = 0;
@@ -36,7 +34,7 @@ float g = (255);
 float b = (150);
 PImage face, hGreen, hRed, hBlue;
 float imgheight = 250;
-int lives = 3;
+int lives = 2;
 PImage helmet;
 void draw()
 {
@@ -50,31 +48,31 @@ void draw()
     rect(width/2-50, height*0.55-30, 100, 40);
     fill(diffCol2);
     rect(width/2-50, height*0.7-30, 100, 40);
-    fill(0,220,0);
+    fill(0, 220, 0);
     rect(width*0.15-25, height*0.35-10, 20, 20);
-    fill(220,0,0);
+    fill(220, 0, 0);
     rect(width*0.1-25, height*0.35-10, 20, 20);
-    fill(0,0,220);
+    fill(0, 0, 220);
     rect(width*0.2-25, height*0.35-10, 20, 20);
-    
+
     fill(255);
-    textFont(titleFont,34);
+    textFont(titleFont, 34);
     textAlign(CENTER);
     text("Anti-Gravity:", width/2, height*0.1);
     textSize(40);
     text("StalagMIGHT", width/2, height*0.18);
     textSize(15);
-    text("Choose Helmet Color:",width*0.15,height*0.3);
+    text("Choose Helmet Color:", width*0.15, height*0.3);
     textSize(28);
     fill(0);
     text("Play", width/2, height*0.55);
     text("Quit", width/2, height*0.7);
-    
-    
+
+
     if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.55-30&&mouseY<height*0.55+10)
     {
       imgheight = height*0.5;
-      diffCol1 = color(r,g,b);
+      diffCol1 = color(r, g, b);
       if (mousePressed)
       {
         screen = 1;
@@ -86,7 +84,7 @@ void draw()
     if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.7-30&&mouseY<height*0.7+10)
     {
       imgheight = height*0.66;
-      diffCol2 = color(r,g,b);
+      diffCol2 = color(r, g, b);
       if (mousePressed)
       {
         exit();
@@ -95,28 +93,30 @@ void draw()
     {
       diffCol2=color(200);
     }
-    if (mouseX>width*0.1-10&&mouseX<width*0.15+10&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
+    if (mouseX>width*0.15-25&&mouseX<width*0.15-5&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
     {
-      if(mousePressed)
+      if (mousePressed)
       {
+        sprites.spriteChoices(1);
         helmet = hGreen;
       }
     }
-    if (mouseX>width*0.15-10&&mouseX<width*0.2+10&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
+    if (mouseX>width*0.2-25&&mouseX<width*0.2-5&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
     {
-      if(mousePressed)
+      if (mousePressed)
       {
+        sprites.spriteChoices(2);
         helmet = hBlue;
       }
     }
-    if (mouseX>width*0.05-10&&mouseX<width*0.1+10&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
+    if (mouseX>width*0.1-25&&mouseX<width*0.1-5&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
     {
-      if(mousePressed)
+      if (mousePressed)
       {
+        sprites.spriteChoices(3);
         helmet = hRed;
       }
     }
-    
   }
   if (screen == 1)
   {
@@ -186,18 +186,18 @@ void draw()
 
     stickman.update('a', 'd');
     stickman.render();
-    
+
     sprites.spriteChooser();
-    sprites.update('a','d');
+    sprites.update('a', 'd');
     sprites.render();
     fill(0);
     spikes.render();
     spikes.update();
     if (keyPressed)
     {
-      if (key =='m')
+      if (key =='p')
       {
-        screen = 0;
+        screen = 4;
       }
     }
     collisions();
@@ -241,6 +241,46 @@ void draw()
       diffCol2=color(200, 100, 255);
     }
   }
+  if (screen == 4)
+  {
+    background(0);
+    
+     fill(diffCol1);
+    rect(width/2-50, height*0.55-30, 100, 40);
+    fill(diffCol2);
+    rect(width/2-50, height*0.7-30, 100, 40);
+    fill(200);
+    textSize(40);
+    text("Paused", width/2, height*0.28);
+    textSize(28);
+    fill(0);
+    text("Play", width/2, height*0.55);
+    text("Quit", width/2, height*0.7);
+    if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.55-30&&mouseY<height*0.55+10)
+    {
+      imgheight = height*0.5;
+      diffCol1 = color(r, g, b);
+      if (mousePressed)
+      {
+        screen = 2;
+      }
+    } else
+    {
+      diffCol1=color(200);
+    }
+    if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.7-30&&mouseY<height*0.7+10)
+    {
+      imgheight = height*0.66;
+      diffCol2 = color(r, g, b);
+      if (mousePressed)
+      {
+        exit();
+      }
+    } else
+    {
+      diffCol2=color(200);
+    }
+  }
 }
 
 void collisions()
@@ -252,12 +292,12 @@ void collisions()
     {
       spikes.xPos[i] = width * 2 ;//move it out of the way
       println("lives = " + lives);
-      /*if (lives == 0)
+      if (lives == 0)
       {
         screen = 3;
         lives = 3;
       } 
-      lives--;*/
+      lives--;
     }//end if
   }//end for
 }
