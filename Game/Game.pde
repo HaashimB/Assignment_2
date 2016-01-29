@@ -142,6 +142,7 @@ void draw()
       diffCol1 = color(155, 0, 255);
       if (mousePressed)
       {
+        spikes.spikeLocation();
         spikes.easy();
         screen = 2;
       }
@@ -154,6 +155,7 @@ void draw()
       diffCol2 = color(155, 0, 255);
       if (mousePressed)
       {
+        spikes.spikeLocation();
         spikes.medium();
         screen = 2;
       }
@@ -166,6 +168,7 @@ void draw()
       diffCol3 = color(155, 0, 255);
       if (mousePressed)
       {
+        spikes.spikeLocation();
         spikes.hard();
         screen = 2;
       }
@@ -187,8 +190,7 @@ void draw()
     background(0);
     textSize(15);
     textAlign(LEFT);
-    spikes.score[1] = 0;
-    text("Score = " + spikes.score[0],20,80);
+    text("Score = " + spikes.score,20,80);
     collisions();
     hearts.currentHearts();
     hearts.HP();
@@ -218,8 +220,7 @@ void draw()
     textAlign(CENTER);
     text("GAME OVER", width/2, height*0.28);
     textSize(20);
-    spikes.score[0] = 0;
-    text("Your score was: " + spikes.score[1],width/2,height*0.35);
+    text("Your score was: " + spikes.score,width/2,height*0.35);
     fill(diffCol2);
     rect(width*0.6-50, height*0.6-30, 100, 40);
     fill(diffCol1);
@@ -234,7 +235,8 @@ void draw()
       diffCol1 = color(155, 0, 255);
       if (mousePressed)
       {
-        spikes.medium();
+        spikes.score = 0;
+        spikes.spikeLocation();
         screen = 2;
       }
     } else
@@ -246,6 +248,7 @@ void draw()
       diffCol2 = color(155, 0, 255);
       if (mousePressed)
       {
+        spikes.score = 0;
         spikes.hard();
         screen = 0;
       }
@@ -264,6 +267,7 @@ void draw()
     rect(width/2-50, height*0.7-30, 100, 40);
     fill(200);
     textSize(40);
+    textAlign(CENTER);
     text("Paused", width/2, height*0.28);
     textSize(28);
     fill(0);
