@@ -139,6 +139,8 @@ void draw()
       diffCol1 = color(155, 0, 255);
       if (mousePressed)
       {
+        stickman.xSpeed = 5;
+        sprites.xSpeed = 5;
         spikes.spikeLocation();
         spikes.easy();
         screen = 2;
@@ -152,6 +154,8 @@ void draw()
       diffCol2 = color(155, 0, 255);
       if (mousePressed)
       {
+        stickman.xSpeed = 6;
+        sprites.xSpeed = 6;
         spikes.spikeLocation();
         spikes.medium();
         screen = 2;
@@ -165,6 +169,8 @@ void draw()
       diffCol3 = color(155, 0, 255);
       if (mousePressed)
       {
+        stickman.xSpeed = 8;
+        sprites.xSpeed = 8;
         spikes.spikeLocation();
         spikes.hard();
         screen = 2;

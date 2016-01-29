@@ -25,7 +25,7 @@ class Spikes extends GameObject
     difficulty = 2;
     for (int i = 0; i < spikeNum; i++)
     {
-      spikeSpeed[i] = random(6, 11);
+      spikeSpeed[i] = random(8, 12);
     }
   }
   void hard()
@@ -33,7 +33,7 @@ class Spikes extends GameObject
     difficulty = 3;
     for (int i = 0; i < spikeNum; i++)
     {
-      spikeSpeed[i] = random(9, 14);
+      spikeSpeed[i] = random(10, 15);
     }
   }
   void spikeLocation()
@@ -47,15 +47,15 @@ class Spikes extends GameObject
       fixedPos[i] = -100;
       if (difficulty == 1)
       {
-        spikeSpeed[i] = random(2, 5);
+        spikeSpeed[i] = random(4, 8);
       }
       if (difficulty == 2)
       {
-        spikeSpeed[i] = random(3, 7);
+        spikeSpeed[i] = random(8, 12);
       }
       if (difficulty == 3)
       {
-        spikeSpeed[i] = random(6, 10);
+        spikeSpeed[i] = random(10, 15);
       }
     }
   }
@@ -75,15 +75,15 @@ class Spikes extends GameObject
         fixedPos[i] = -100;
         if (difficulty == 1)
         {
-          spikeSpeed[i] = random(2, 5);
+          spikeSpeed[i] = random(4, 8);
         }
         if (difficulty == 2)
         {
-          spikeSpeed[i] = random(3, 7);
+          spikeSpeed[i] = random(8, 12);
         }
         if (difficulty == 3)
         {
-          spikeSpeed[i] = random(6, 10);
+          spikeSpeed[i] = random(10, 15);
         }
       }
     }
