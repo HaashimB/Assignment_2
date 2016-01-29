@@ -33,7 +33,7 @@ class Spikes extends GameObject
     difficulty = 3;
     for (int i = 0; i < spikeNum; i++)
     {
-      spikeSpeed[i] = random(8, 13);
+      spikeSpeed[i] = random(9, 14);
     }
   }
   void spikeLocation()
