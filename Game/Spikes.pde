@@ -8,7 +8,7 @@ class Spikes extends GameObject
   float[] spikeCol = new float[spikeNum];
   float cell = width/10;//evenly spaces spikes
   int difficulty;
-
+  int []score = new int[2];
   Spikes()
   {
   }
@@ -33,7 +33,7 @@ class Spikes extends GameObject
     difficulty = 3;
     for (int i = 0; i < spikeNum; i++)
     {
-      spikeSpeed[i] = random(10, 14);
+      spikeSpeed[i] = random(8, 13);
     }
   }
   void spikeLocation()
@@ -53,11 +53,13 @@ class Spikes extends GameObject
   {
     for (int i=0; i<spikeNum; i++)
     {
-
+      
       yPos[i]+=spikeSpeed[i];
       fixedPos[i]+=spikeSpeed[i];
       if (yPos[i] >= height+150)
       {
+        score[1]++;
+        score[0]++;
         yPos[i] = random(50, 150)-100;
         xPos[i]= cell * random(10);
         fixedPos[i] = -100;

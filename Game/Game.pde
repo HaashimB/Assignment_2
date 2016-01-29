@@ -1,15 +1,18 @@
 //Programming Assignment
-
+//Initialise Classes in main
 Stickman stickman;
 Spikes spikes;
 Sprites sprites;
-PFont titleFont;
+Hearts hearts;
+PFont titleFont;//Variable for main font used
 void setup()
 {
   size(700, 500);
   stickman = new Stickman('a', 'd');
   spikes = new Spikes();
   sprites = new Sprites();
+  hearts = new Hearts();
+  hearts.heartInit();
   sprites.imageInit();
   gameObjects.add(spikes);
   gameObjects.add(stickman);
@@ -34,7 +37,6 @@ float g = (255);
 float b = (150);
 PImage face, hGreen, hRed, hBlue;
 float imgheight = 250;
-int lives = 2;
 PImage helmet;
 void draw()
 {
@@ -120,7 +122,7 @@ void draw()
   }
   if (screen == 1)
   {
-    background(0);   
+    background(100);   
     fill(diffCol1);
     rect(width*0.3-50, height*0.4-30, 100, 40);
     fill(diffCol2);
@@ -182,8 +184,15 @@ void draw()
       go.update();
       go.render();
     }
-    background(255);
-
+    background(0);
+    textSize(15);
+    textAlign(LEFT);
+    spikes.score[1] = 0;
+    text("Score = " + spikes.score[0],20,80);
+    collisions();
+    hearts.currentHearts();
+    hearts.HP();
+    
     stickman.update('a', 'd');
     stickman.render();
 
@@ -200,13 +209,17 @@ void draw()
         screen = 4;
       }
     }
-    collisions();
+    
   }
   if (screen ==3)
   {
     background(0);
     textSize(40);
+    textAlign(CENTER);
     text("GAME OVER", width/2, height*0.28);
+    textSize(20);
+    spikes.score[0] = 0;
+    text("Your score was: " + spikes.score[1],width/2,height*0.35);
     fill(diffCol2);
     rect(width*0.6-50, height*0.6-30, 100, 40);
     fill(diffCol1);
@@ -291,13 +304,13 @@ void collisions()
     if (dist(stickman.xPlayer-30, 480, spikes.xPos[i], spikes.yPos[i]) <= spikes.cell-10)
     {
       spikes.xPos[i] = width * 2 ;//move it out of the way
-      println("lives = " + lives);
-      if (lives == 0)
+      hearts.lives--;
+      if (hearts.lives == 0)
       {
         screen = 3;
-        lives = 3;
+        hearts.lives = 3;
       } 
-      lives--;
+      
     }//end if
   }//end for
 }
