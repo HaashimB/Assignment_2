@@ -5,14 +5,15 @@ import ddf.minim.analysis.*;
 import ddf.minim.ugens.*;
 import ddf.minim.effects.*;
 
+
 //Programming Assignment
 //Initialise Classes in main
 Stickman stickman;
 Spikes spikes;
 Sprites sprites;
 Hearts hearts;
-
-
+GameMusic gameMusic;
+Minim minim;
 PFont titleFont;//Variable for main font used
 void setup()
 {
@@ -21,6 +22,9 @@ void setup()
   spikes = new Spikes();
   sprites = new Sprites();
   hearts = new Hearts();
+  minim = new Minim(this);
+  gameMusic = new GameMusic();
+  gameMusic.musicInit();
   hearts.heartInit();
   sprites.imageInit();
   gameObjects.add(spikes);
@@ -32,6 +36,8 @@ void setup()
   hRed = loadImage("Helmet_Red.png");
   titleFont = loadFont("Standard0757-48.vlw");
   helmet = hGreen;
+  gameMusic.chooseMusic();
+  gameMusic.startMusic();
 }
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 int screen = 0;
@@ -318,6 +324,9 @@ void collisions()
       hearts.lives--;
       if (hearts.lives == 0)
       {
+        gameMusic.stopMusic();
+        gameMusic.musicChoice = 3;
+        gameMusic.startMusic();
         screen = 3;
         hearts.lives = 3;
       }
