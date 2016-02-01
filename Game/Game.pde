@@ -31,6 +31,7 @@ void setup()
   gameObjects.add(stickman);
   spikes.spikeLocation();
   face = loadImage("player.png");
+  stalagmite = loadImage("spike.png");
   hGreen = loadImage("Helmet_Green.png");
   hBlue = loadImage("Helmet_Blue.png");
   hRed = loadImage("Helmet_Red.png");
@@ -47,17 +48,17 @@ color diffCol3;
 float r = (255);
 float g = (255);
 float b = (150);
-PImage face, hGreen, hRed, hBlue;
+PImage face, hGreen, hRed, hBlue,stalagmite;
 float imgheight = 250;
 PImage helmet;
 void draw()
 {
   if (screen == 0)
   {
-    background(100);   
+    background(0);   
     image(face, width*0.21, imgheight);
     image(helmet, width*0.21, imgheight-70);
-
+    image(stalagmite,width*0.55, -40);
     fill(diffCol1);
     rect(width/2-50, height*0.55-30, 100, 40);
     fill(diffCol2);
@@ -77,8 +78,11 @@ void draw()
     text("StalagMIGHT", width/2, height*0.18);
     textSize(15);
     text("Choose Color:", width*0.13, height*0.3);
-    textSize(28);
     fill(0);
+    textSize(20);
+    text("Dodge\nor\nDIE!\n", width*0.64, 130);
+    
+    textSize(28);
     text("Play", width/2, height*0.55);
     text("Quit", width/2, height*0.7);
 
@@ -134,7 +138,7 @@ void draw()
   }
   if (screen == 1)
   {
-    background(100);   
+    background(0);   
     fill(diffCol1);
     rect(width*0.3-50, height*0.4-30, 100, 40);
     fill(diffCol2);
@@ -149,6 +153,8 @@ void draw()
     text("Easy", width*0.3, height*0.4);
     text("Normal", width*0.5, height*0.4);
     text("Hard", width*0.7, height*0.4);
+    text("'a' and 'd' to move left and right",width*0.5, 250);
+    text("'p' to Pause",width*0.5, 280);
     if (mouseX>width*0.3-50&&mouseX<width*0.3+50&&mouseY>height*0.4-30&&mouseY<height*0.4+10)
     {
       diffCol1 = color(155, 0, 255);
