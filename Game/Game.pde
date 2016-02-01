@@ -1,9 +1,18 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
 //Programming Assignment
 //Initialise Classes in main
 Stickman stickman;
 Spikes spikes;
 Sprites sprites;
 Hearts hearts;
+
+
 PFont titleFont;//Variable for main font used
 void setup()
 {
@@ -61,7 +70,7 @@ void draw()
     textSize(40);
     text("StalagMIGHT", width/2, height*0.18);
     textSize(15);
-    text("Choose Helmet Color:", width*0.15, height*0.3);
+    text("Choose Color:", width*0.13, height*0.3);
     textSize(28);
     fill(0);
     text("Play", width/2, height*0.55);
