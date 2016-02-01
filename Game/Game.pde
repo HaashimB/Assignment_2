@@ -260,6 +260,10 @@ void draw()
       diffCol2 = color(155, 0, 255);
       if (mousePressed)
       {
+        gameMusic.stopMusic();
+        gameMusic.musicChoice = 1;
+        gameMusic.chooseMusic();
+        gameMusic.startMusic();
         sprites.xPlayer = width/2;
         stickman.xPlayer = width/2;
         spikes.score = 0;
@@ -326,6 +330,7 @@ void collisions()
       {
         gameMusic.stopMusic();
         gameMusic.musicChoice = 3;
+        gameMusic.chooseMusic();
         gameMusic.startMusic();
         screen = 3;
         hearts.lives = 3;
