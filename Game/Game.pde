@@ -35,6 +35,7 @@ void setup()
   hGreen = loadImage("Helmet_Green.png");
   hBlue = loadImage("Helmet_Blue.png");
   hRed = loadImage("Helmet_Red.png");
+  back = loadImage("Game Background.png");
   titleFont = loadFont("Standard0757-48.vlw");
   helmet = hGreen;
   gameMusic.chooseMusic();
@@ -48,21 +49,25 @@ color diffCol3;
 float r = (255);
 float g = (255);
 float b = (150);
-PImage face, hGreen, hRed, hBlue,stalagmite;
+PImage face, hGreen, hRed, hBlue,stalagmite,back;
 float imgheight = 250;
 PImage helmet;
 void draw()
 {
   if (screen == 0)
   {
-    background(0);   
-    image(face, width*0.21, imgheight);
-    image(helmet, width*0.21, imgheight-70);
+    background(0); 
+     
+    image(face, width*0.22, imgheight);
+    image(helmet, width*0.22, imgheight-70);
     image(stalagmite,width*0.55, -40);
+    stroke(diffCol1); 
     fill(diffCol1);
     rect(width/2-50, height*0.55-30, 100, 40);
+    stroke(diffCol2);
     fill(diffCol2);
     rect(width/2-50, height*0.7-30, 100, 40);
+    stroke(0); 
     fill(0, 220, 0);
     rect(width*0.15-25, height*0.35-10, 20, 20);
     fill(220, 0, 0);
@@ -207,7 +212,9 @@ void draw()
     background(0);
     textSize(15);
     textAlign(LEFT);
+    image(back,0,0);
     text("Score = " + spikes.score, 20, 80);
+    
     collisions();
     hearts.currentHearts();
     hearts.HP();
