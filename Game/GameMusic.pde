@@ -5,6 +5,7 @@ class GameMusic
   AudioPlayer menu;
   AudioPlayer gameOver;
   AudioPlayer ActiveMusic;
+  AudioPlayer gameStart;
   int musicChoice = 1;
   GameMusic()
   {
@@ -14,6 +15,7 @@ class GameMusic
   {
     menu = minim.loadFile("CarelessWhisper.mp3");
     gameOver = minim.loadFile("Gameover.mp3");
+    gameStart = minim.loadFile("Namu.mp3");
   }
   void startMusic()
   {
@@ -34,6 +36,7 @@ class GameMusic
     }
     if (musicChoice == 2)
     {
+      ActiveMusic = gameStart;
     }
     if (musicChoice == 3)
     {

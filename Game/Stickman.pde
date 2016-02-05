@@ -38,8 +38,8 @@ class Stickman extends GameObject
   void render()
   {
     pushMatrix(); // reset the tr+n and rotation
-    stroke(0);
-    fill(0);
+    noStroke();
+    noFill();
     ellipse(xPlayer,430,head,head);
     line(xPlayer,443,xPlayer,470);
     line(xPlayer,447,xPlayer+20,460);
