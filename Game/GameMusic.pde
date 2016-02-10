@@ -1,35 +1,39 @@
 
 class GameMusic
 {
+  //declare audioplayer variables
+  AudioPlayer menu;//music for main menu screen
+  AudioPlayer gameOver;//music for game over screen
+  AudioPlayer ActiveMusic;//current music chosen to play
+  AudioPlayer gameStart;//music for in-game screen
   
-  AudioPlayer menu;
-  AudioPlayer gameOver;
-  AudioPlayer ActiveMusic;
-  AudioPlayer gameStart;
-  int musicChoice = 1;
+  int musicChoice = 1;//variable to choose music playing
+  
   GameMusic()
   {
   }
 
-  void musicInit()
+  void musicInit()//initialises all the music
   {
     menu = minim.loadFile("CarelessWhisper.mp3");
     gameOver = minim.loadFile("Gameover.mp3");
     gameStart = minim.loadFile("Namu.mp3");
-  }
-  void startMusic()
+  }//end void musicInit()
+  
+  void startMusic()//function to start current music
   {
     ActiveMusic.play();
-  }
+  }//end void startMusic()
 
-  void stopMusic()
+  void stopMusic()//function to stop current music and rewind to start
   {
     ActiveMusic.pause();
     ActiveMusic.rewind();
-  }
+  }//end void stopMusic()
 
-  void chooseMusic()
+  void chooseMusic()//function to choose which music is playing based on variable musicChoice
   {
+    //Contents of ActiveMusic change based on what integer value is in musicChoice
     if (musicChoice == 1)
     {
       ActiveMusic = menu;
@@ -42,6 +46,7 @@ class GameMusic
     {
       ActiveMusic = gameOver;
     }
-  }
-}
+  }//end void chooseMusic()
+  
+}//end class GaemMusic
 
