@@ -1,13 +1,10 @@
-import ddf.minim.spi.*;
-import ddf.minim.signals.*;
-import ddf.minim.*;
-import ddf.minim.analysis.*;
-import ddf.minim.ugens.*;
-import ddf.minim.effects.*;
 
 
 //Programming Assignment
-//Initialise Classes in main
+
+import ddf.minim.*;//import use of sounds and music
+
+//Declare Classes in main
 Stickman stickman;
 Spikes spikes;
 Sprites sprites;
@@ -16,23 +13,28 @@ GameMusic gameMusic;
 Minim minim;
 
 PFont titleFont;//Variable for main font used
+
 void setup()
 {
   size(700, 500);
-  stickman = new Stickman('a', 'd');
+  
+  stickman = new Stickman('a', 'd');//initialise classes
   spikes = new Spikes();
   sprites = new Sprites();
   hearts = new Hearts();
   minim = new Minim(this);
   gameMusic = new GameMusic();
-  gameMusic.musicInit();
+  
+  gameMusic.musicInit();//initialise objects and variables in classes
   hearts.heartInit();
   sprites.imageInit();
-  gameObjects.add(spikes);
+  
+  gameObjects.add(spikes);//add classes to gameObjects()
   gameObjects.add(stickman);
-  spikes.spikeLocation();
-  //load images used in main menu and game.
-  face = loadImage("player.png");
+  
+  spikes.spikeLocation();//set location, and speed of spikes
+  
+  face = loadImage("player.png");//load images used in main menu and game.
   stalagmite = loadImage("spike.png");
   hGreen = loadImage("Helmet_Green.png");
   hBlue = loadImage("Helmet_Blue.png");
@@ -40,17 +42,20 @@ void setup()
   back = loadImage("Game Background.png");
   torch1 = loadImage("torches1.png");
   torch2 = loadImage("torches2.png");
-  //load font used throughout game
-  titleFont = loadFont("Standard0757-48.vlw");
-  helmet = hGreen;
-  //start game music
-  gameMusic.chooseMusic();
-  gameMusic.startMusic();
-  //load in highscore
-  highscoreLoad();
   
-  frameRate(60);
-}
+  titleFont = loadFont("Standard0757-48.vlw");  //load font used throughout game
+  
+  helmet = hGreen;//initialise helmet to green to avoid null pointer 
+  
+  gameMusic.chooseMusic();//start game music
+  gameMusic.startMusic();
+  
+  highscoreLoad();//load in highscore
+  
+  frameRate(60);//set Framerate to 60
+  
+}//end setup()
+
 //declare global variables
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 int screen = 0;//variable to control which menu is active
@@ -67,22 +72,25 @@ float torchSwitch = 0;//variable to control torch flicker in game
 int high_score = 0;//variable to keep track of high score
 PrintWriter output;//variable to write to Highscore.csv file
 AudioPlayer scream;//sound that plays when player is hit
+
 void draw()
 {
   if (screen == 0)//main menu
   {
     background(0); 
 
-    image(face, width*0.22, imgheight);
-    image(helmet, width*0.22, imgheight-70);
-    image(stalagmite, width*0.55, -40);
+    image(face, width*0.22, imgheight);//face in main menu
+    image(helmet, width*0.22, imgheight-70);//helmet in main menu
+    image(stalagmite, width*0.55, -40);//enemy spike
     stroke(diffCol1); 
     fill(diffCol1);
-    rect(width/2-50, height*0.55-30, 100, 40);
+    rect(width/2-50, height*0.55-30, 100, 40);//rect for play button
     stroke(diffCol2);
     fill(diffCol2);
-    rect(width/2-50, height*0.7-30, 100, 40);
+    rect(width/2-50, height*0.7-30, 100, 40);//rect of quit button
     stroke(0); 
+    
+    //rects for choosing color
     fill(0, 220, 0);
     rect(width*0.15-25, height*0.35-10, 20, 20);
     fill(220, 0, 0);
@@ -90,6 +98,7 @@ void draw()
     fill(0, 0, 220);
     rect(width*0.2-25, height*0.35-10, 20, 20);
 
+    //text for title and color choice in main menu
     fill(255);
     textFont(titleFont, 34);
     textAlign(CENTER);
@@ -101,12 +110,13 @@ void draw()
     fill(0);
     textSize(20);
     text("Dodge\nor\nDIE!\n", width*0.64, 130);
-
+    
+    //text for play and quit buttons
     textSize(28);
     text("Play", width/2, height*0.55);
     text("Quit", width/2, height*0.7);
 
-
+    //if statements to control buttons in main
     if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.55-30&&mouseY<height*0.55+10)
     {
       imgheight = height*0.5;
@@ -114,11 +124,12 @@ void draw()
       if (mousePressed)
       {
         screen = 1;
-      }
-    } else
+      }//end if
+    }//end if
+    else
     {
       diffCol1=color(200);
-    }
+    }//end else
     if (mouseX>width/2-50&&mouseX<width/2+50&&mouseY>height*0.7-30&&mouseY<height*0.7+10)
     {
       imgheight = height*0.66;
@@ -126,39 +137,45 @@ void draw()
       if (mousePressed)
       {
         exit();
-      }
-    } else
+      }//end if
+    }//end if 
+    else
     {
       diffCol2=color(200);
-    }
+    }//end else
+    //if statements to control buttons for color choice in main screen
     if (mouseX>width*0.15-25&&mouseX<width*0.15-5&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
     {
       if (mousePressed)
       {
         sprites.spriteChoices(1);
         helmet = hGreen;
-      }
-    }
+      }//end if
+    }//end if
     if (mouseX>width*0.2-25&&mouseX<width*0.2-5&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
     {
       if (mousePressed)
       {
         sprites.spriteChoices(2);
         helmet = hBlue;
-      }
-    }
+      }//end if
+    }//end if
     if (mouseX>width*0.1-25&&mouseX<width*0.1-5&&mouseY>height*0.35-10&&mouseY<height*0.35+10)
     {
       if (mousePressed)
       {
         sprites.spriteChoices(3);
         helmet = hRed;
-      }
-    }
-  }
+      }//end if
+    }//end if
+    
+  }//end if for screen 0
+  
   if (screen == 1)//difficulty screen
   {
-    background(0);   
+    background(0); 
+  
+    //rects for difficulty settings  
     fill(diffCol1);
     rect(width*0.3-50, height*0.4-30, 100, 40);
     fill(diffCol2);
@@ -166,6 +183,8 @@ void draw()
     fill(diffCol3);
     rect(width*0.7-50, height*0.4-30, 100, 40);
     fill(255);
+    
+    //text used in difficulty screen
     textSize(25);
     textAlign(CENTER);
     text("Choose Difficulty:", width/2, height*0.3);
@@ -173,8 +192,12 @@ void draw()
     text("Easy", width*0.3, height*0.4);
     text("Normal", width*0.5, height*0.4);
     text("Hard", width*0.7, height*0.4);
+    
+    //instructions on how to play
     text("'a' and 'd' to move left and right", width*0.5, 250);
     text("'p' to Pause", width*0.5, 280);
+    
+    //if statements to control buttons in difficulty screen
     if (mouseX>width*0.3-50&&mouseX<width*0.3+50&&mouseY>height*0.4-30&&mouseY<height*0.4+10)
     {
       diffCol1 = color(155, 0, 255);
@@ -189,11 +212,12 @@ void draw()
         spikes.spikeLocation();
         spikes.easy();
         screen = 2;
-      }
-    } else
+      }//end if
+    }//end if
+    else
     {
       diffCol1 = color(200, 100, 255);
-    }
+    }//end else
     if (mouseX>width*0.5-50&&mouseX<width*0.5+50&&mouseY>height*0.4-30&&mouseY<height*0.4+10)
     {
       diffCol2 = color(155, 0, 255);
@@ -208,11 +232,12 @@ void draw()
         spikes.spikeLocation();
         spikes.medium();
         screen = 2;
-      }
-    } else
+      }//end if
+    }//end if
+    else
     {
       diffCol2=color(200, 100, 255);
-    }
+    }//end else
     if (mouseX>width*0.7-50&&mouseX<width*0.7+50&&mouseY>height*0.4-30&&mouseY<height*0.4+10)
     {
       diffCol3 = color(155, 0, 255);
@@ -227,19 +252,23 @@ void draw()
         spikes.spikeLocation();
         spikes.hard();
         screen = 2;
-      }
-    } else
+      }//end if
+    }//end if
+    else
     {
       diffCol3=color(200, 100, 255);
-    }
-  }
+    }//end else
+
+  }//end if statement for screen 1
 
   if (screen == 2)//game screen
   {
     background(0);
     textSize(15);
     textAlign(LEFT);
-    image(back, 0, 0);
+    image(back, 0, 0);//in-game baackground
+    
+    //code to control torch flickering in-game
     torchSwitch++;
     if (torchSwitch>=20)
     {
