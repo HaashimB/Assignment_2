@@ -48,25 +48,25 @@ void setup()
   gameMusic.startMusic();
   //load in highscore
   highscoreLoad();
-  output = createWriter("Highscore.csv");
-  output.flush();
+  
   frameRate(60);
 }
 //declare global variables
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-int screen = 0;
-color diffCol1;
+int screen = 0;//variable to control which menu is active
+color diffCol1;//colors for buttons
 color diffCol2;
 color diffCol3;
-float r = (255);
+float r = (255);//colors for other buttons
 float g = (255);
 float b = (150);
-PImage face, hGreen, hRed, hBlue, stalagmite, back, torch1, torch2;
+PImage face, hGreen, hRed, hBlue, stalagmite, back, torch1, torch2;//images used in main menu and in-game
 float imgheight = 250;
-PImage helmet;
-float torchSwitch = 0;
-int high_score = 0;
-PrintWriter output;
+PImage helmet;//image used in main menu
+float torchSwitch = 0;//variable to control torch flicker in game
+int high_score = 0;//variable to keep track of high score
+PrintWriter output;//variable to write to Highscore.csv file
+AudioPlayer scream;//sound that plays when player is hit
 void draw()
 {
   if (screen == 0)//main menu
@@ -125,7 +125,6 @@ void draw()
       diffCol2 = color(r, g, b);
       if (mousePressed)
       {
-        output.close();
         exit();
       }
     } else
@@ -283,8 +282,7 @@ void draw()
     textAlign(CENTER);
     text("GAME OVER", width/2, height*0.28);
     textSize(20);
-    text("Your score was: " + spikes.score, width*0.6, height*0.35);
-    text("Highscore:" + high_score, width*0.3, height*0.35);
+    text("Highscore:" + high_score + "    " + "Your score was: " + spikes.score, width/2, height*0.35);
     fill(diffCol2);
     rect(width*0.6-50, height*0.6-30, 100, 40);
     fill(diffCol1);
@@ -365,7 +363,6 @@ void draw()
       diffCol2 = color(r, g, b);
       if (mousePressed)
       {
-        output.close();
         exit();
       }
     } else
@@ -396,8 +393,10 @@ void collisions()
         hearts.lives = 3;
         if (spikes.score>high_score)
         {
+          output = createWriter("Highscore.csv");
           output.println(spikes.score);
           output.flush();
+          output.close();
           highscoreLoad();
         }
       }
