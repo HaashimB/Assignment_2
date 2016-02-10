@@ -50,6 +50,8 @@ void setup()
   gameMusic.chooseMusic();//start game music
   gameMusic.startMusic();
   
+  scream = minim.loadFile("Pain.mp3");//load sound into variable scream
+  
   highscoreLoad();//load in highscore
   
   frameRate(60);//set Framerate to 60
@@ -399,7 +401,7 @@ void draw()
         //set screen to 0 (main menu screen)
         screen = 0;
       }//end if
-    }/end if
+    }//end if
     else
     {
       diffCol2=color(200, 100, 255);
@@ -468,6 +470,8 @@ void collisions()//function to detect collisions between spikes and stickman
       hearts.lives--;//heart is lost if hit
       fill(255, 0, 0);
       rect(0, 0, width, height);
+      scream.play();
+      scream.rewind();
       if (hearts.lives == 0)
       {
         //stops current music, selects music for Game Over screen by changing musicChoice variable and plays music
