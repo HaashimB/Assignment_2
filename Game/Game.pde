@@ -14,7 +14,7 @@ Sprites sprites;
 Hearts hearts;
 GameMusic gameMusic;
 Minim minim;
-Highscore highscore;
+
 PFont titleFont;//Variable for main font used
 void setup()
 {
@@ -31,6 +31,7 @@ void setup()
   gameObjects.add(spikes);
   gameObjects.add(stickman);
   spikes.spikeLocation();
+  //load images used in main menu and game.
   face = loadImage("player.png");
   stalagmite = loadImage("spike.png");
   hGreen = loadImage("Helmet_Green.png");
@@ -39,14 +40,19 @@ void setup()
   back = loadImage("Game Background.png");
   torch1 = loadImage("torches1.png");
   torch2 = loadImage("torches2.png");
+  //load font used throughout game
   titleFont = loadFont("Standard0757-48.vlw");
   helmet = hGreen;
+  //start game music
   gameMusic.chooseMusic();
   gameMusic.startMusic();
-  //highscoreData = new ArrayList<Highscore>();
- // readInHighscore();
+  //load in highscore
+  highscoreLoad();
+  output = createWriter("Highscore.csv");
+  output.flush();
   frameRate(60);
 }
+//declare global variables
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 int screen = 0;
 color diffCol1;
@@ -59,9 +65,11 @@ PImage face, hGreen, hRed, hBlue, stalagmite, back, torch1, torch2;
 float imgheight = 250;
 PImage helmet;
 float torchSwitch = 0;
+int high_score = 0;
+PrintWriter output;
 void draw()
 {
-  if (screen == 0)
+  if (screen == 0)//main menu
   {
     background(0); 
 
@@ -117,6 +125,7 @@ void draw()
       diffCol2 = color(r, g, b);
       if (mousePressed)
       {
+        output.close();
         exit();
       }
     } else
@@ -148,7 +157,7 @@ void draw()
       }
     }
   }
-  if (screen == 1)
+  if (screen == 1)//difficulty screen
   {
     background(0);   
     fill(diffCol1);
@@ -226,7 +235,7 @@ void draw()
     }
   }
 
-  if (screen == 2)
+  if (screen == 2)//game screen
   {
     background(0);
     textSize(15);
@@ -236,12 +245,11 @@ void draw()
     if (torchSwitch>=20)
     {
       image(torch1, 0, 0);
-      if(torchSwitch>=40)
+      if (torchSwitch>=40)
       {
-       torchSwitch = 0; 
+        torchSwitch = 0;
       }
-    }
-    else
+    } else
     {
       image(torch2, 0, 0);
     }
@@ -268,14 +276,15 @@ void draw()
       }
     }
   }
-  if (screen ==3)
+  if (screen ==3)//Game Over screen
   {
     background(0);
     textSize(40);
     textAlign(CENTER);
     text("GAME OVER", width/2, height*0.28);
     textSize(20);
-    text("Your score was: " + spikes.score, width/2, height*0.35);
+    text("Your score was: " + spikes.score, width*0.6, height*0.35);
+    text("Highscore:" + high_score, width*0.3, height*0.35);
     fill(diffCol2);
     rect(width*0.6-50, height*0.6-30, 100, 40);
     fill(diffCol1);
@@ -290,6 +299,10 @@ void draw()
       diffCol1 = color(155, 0, 255);
       if (mousePressed)
       {
+        gameMusic.stopMusic();
+        gameMusic.musicChoice = 2;
+        gameMusic.chooseMusic();
+        gameMusic.startMusic();
         sprites.xPlayer = width/2;
         stickman.xPlayer = width/2;
         spikes.score = 0;
@@ -319,10 +332,9 @@ void draw()
       diffCol2=color(200, 100, 255);
     }
   }
-  if (screen == 4)
+  if (screen == 4)//pause menu
   {
     background(0);
-
     fill(diffCol1);
     rect(width/2-50, height*0.55-30, 100, 40);
     fill(diffCol2);
@@ -353,6 +365,7 @@ void draw()
       diffCol2 = color(r, g, b);
       if (mousePressed)
       {
+        output.close();
         exit();
       }
     } else
@@ -370,30 +383,36 @@ void collisions()
     if (dist(stickman.xPlayer-30, 480, spikes.xPos[i], spikes.yPos[i]) <= spikes.cell-10)
     {
       spikes.xPos[i] = width * 2 ;//move it out of the way
-      hearts.lives--;
+      hearts.lives--;//heart is lost if hit
+      fill(255, 0, 0);
+      rect(0, 0, width, height);
       if (hearts.lives == 0)
       {
-        gameMusic.stopMusic();
+        gameMusic.stopMusic();//play game ver music if heart are all gone
         gameMusic.musicChoice = 3;
         gameMusic.chooseMusic();
         gameMusic.startMusic();
         screen = 3;
         hearts.lives = 3;
+        if (spikes.score>high_score)
+        {
+          output.println(spikes.score);
+          output.flush();
+          highscoreLoad();
+        }
       }
     }//end if
   }//end for
 }
 
-/*void readInHighscore()
+
+void highscoreLoad()
 {
-  String[] lines = loadStrings("steam_stats_.csv");
 
-  for (int i = 0; i<lines.length; i++)
-  {
+  String filename = "Highscore.csv";
 
-    highscoreData.add(new (lines[i])); 
-    println(playerData.get(i).titles + " " + playerData.get(i).players);
-    linesGlobal++;
-  }
-}*/
+  String[] lines = loadStrings(filename); // files must be in the data folder
+
+  high_score = parseInt(lines[0]);
+}// end load_in_high_score
 

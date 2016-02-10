@@ -16,19 +16,19 @@ class Hearts extends GameObject
   }
   void currentHearts()
   {
-    if(lives == 3)
+    if (lives == 3)
     {
       activeHeart = heart;
       activeHeart1 = heart;
       activeHeart2 = heart;
     }
-    if(lives == 2)
+    if (lives == 2)
     {
       activeHeart = heartBroken;
       activeHeart1 = heart;
       activeHeart2 = heart;
     }
-    if(lives == 1)
+    if (lives == 1)
     {
       activeHeart = heartBroken;
       activeHeart1 = heartBroken;
@@ -37,9 +37,9 @@ class Hearts extends GameObject
   }
   void HP()
   {
-    image(activeHeart,70,10);
-    image(activeHeart1,40,10);
-    image(activeHeart2,10,10);
+    image(activeHeart, 70, 10);
+    image(activeHeart1, 40, 10);
+    image(activeHeart2, 10, 10);
   }
-  
 }
+
